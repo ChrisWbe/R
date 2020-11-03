@@ -114,13 +114,14 @@ summary(m3)
 str(m1)
 
 # calcular el MSE, R2, Ra2, AIC y BIC de cada modelo
+fileMedidas = file.choose()
+source(fileMedidas)#source("medidas.r")
 
-source("medidas.r")
-
+k1 = 2; k2=3; k3=2; #Cantidad de parametros (Beta)
 N1 = medidas(m1,y,k1) 
 N2 = medidas(m2,y,k2) 
 N3 = medidas(m3,y,k3) 
-
+#Recordar que en el modelo 3 se elimina el intercepto, por tanto el valor de Rcuadrado ajustado no es válido
 N = cbind(N1,N2,N3)
 rownames(N) = rownames(M)
 
