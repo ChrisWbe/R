@@ -12,7 +12,7 @@ ejex.mes = seq(fechas[1],fechas[np], "months")
 ejex.año = seq(fechas[1],fechas[np],"years")
 
 plot(fechas,x, xaxt="n", panel.first = grid(),
-type='b',ylab='produccion.diaria')
+type='l', lwd=2,ylab='produccion.diaria')
 axis.Date(1, at=ejex.mes, format="%m/%y")
 axis.Date(1, at=ejex.año, labels = FALSE, tcl = -0.2)
 

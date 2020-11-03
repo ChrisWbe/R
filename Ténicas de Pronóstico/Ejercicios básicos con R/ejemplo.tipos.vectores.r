@@ -31,10 +31,10 @@ c(1, 2, 3, 4)
 
 #-----
 
-A = cbind(e,s,a)
+A = cbind(e,s,a) #concatenacion por columnas
 (A)
 
-B = rbind(e,s,a)
+B = rbind(e,s,a) #concatenacion por filas
 (B)
 
 V = B%*%A
@@ -43,10 +43,19 @@ V = B%*%A
 
 A1 = A
 for(i in 1:nrow(A)){
-for(j in 1:ncol(A)){
-A1[i,j] = ifelse(!is.na(A[i,j]),A[i,j],1)}}
+  for(j in 1:ncol(A)){
+    A1[i,j] = ifelse(!is.na(A[i,j]),A[i,j],1)
+  }
+}
 
 (A1)
 
+########
+# ejemplo list
+a = matrix(c(2,3,4,5),2,2)
+b = c("web","real")
+d = rnorm(120,2,3)
+L = list(a=a,b=b,d=d)
 
+L[[2]]
 
