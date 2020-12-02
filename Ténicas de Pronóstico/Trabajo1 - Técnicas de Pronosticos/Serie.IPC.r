@@ -2,8 +2,15 @@
 # Variaci´on porcentual mensual del Indice de precios
 # al consumidor, 2000-2012.
 library(readxl)
+library(xtable)
+
+file_medidas = file.choose() #Funcion medidas
+source(file_medidas)
+
+
 file_IPCporcentual = file.choose()
 res <- read_excel(file_IPCporcentual, 1) # lee el primer libro
+
 attach(res)
 y = ts(IPC, frequency=12,start=c(2002,01)) #periodo 12, IPC=y, IPC como objeto ts (serie de tiempo), inicia en enero del 2000
 ts.plot(y)
@@ -40,9 +47,11 @@ lines(ti,yhat1,col='red')
 
 plot(yi,yhat1)
 
+#---- Pruebas F
+anova(mod1)
+
 #------------ MSE - R2-Ajustado - AIC - BIC
-file_medidas = file.choose()
-source(file_medidas)
+
 M = cbind(medidas(mod1,yi,4))
 colnames(M) = c("m1")
 
@@ -62,10 +71,12 @@ pron1 = predict(mod1,data.frame(Xt=I(Xtf)))
 plot(tf,yf, type = 'o',ylim=c(1.3,2.0))
 lines(tf,pron1, type = 'b', pch = 3,col='red' )
 
+# -------- medidas de calidad pronosticos - RMSE, MAPE, Theil's U
 pron1 = ts(pron1,frequency=12,start=c(2016,08),end=c(2017,07))
 
 A=rbind(accuracy(pron1,yf))
 rownames(A) = c("Cúbica-Indicadoras")
 
-library(xtable)
-print(xtable(A))
+(A)
+#library(xtable)
+#print(xtable(A))
